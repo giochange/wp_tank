@@ -40,6 +40,12 @@ public class FollowPath : MonoBehaviour
         g.AStar(currentNode, wps[6]);
         currentWP = 0;
     }
+    //metodo de chamafda do ponto das usinas
+    public void GoTousin()
+    {
+        g.AStar(currentNode, wps[8]);
+        currentWP = 0;
+    }
     private void LateUpdate()
     {
         // condição perante o tamanho "g" igual a 0  ou currentwp = g.getpathlenght
@@ -59,10 +65,12 @@ public class FollowPath : MonoBehaviour
         //currentwp for menor que getpathlength faz com que o tank vá até o ponto
         if (currentWP < g.getPathLength())
         {
+            //valor igual ao do waypoint
             goal = g.getPathPoint(currentWP).transform;
             Vector3 lookAtGoal = new Vector3(goal.position.x,
                 this.transform.position.y,
                 goal.position.z);
+            //direcionamento entre o destino e o tank
             Vector3 direction = lookAtGoal - this.transform.position;
 
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
@@ -71,6 +79,7 @@ public class FollowPath : MonoBehaviour
 
             
         }
+        //movimentação do tank utilizando o translate
         this.transform.Translate(0, 0, speed * Time.deltaTime);
 
     }
